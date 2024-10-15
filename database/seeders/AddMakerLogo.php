@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Maker;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AddMakerLogo extends Seeder
 {
@@ -12,6 +13,13 @@ class AddMakerLogo extends Seeder
      */
     public function run(): void
     {
-        //
+        $makers = Maker::all();
+        
+        $i = 1;
+        foreach($makers as $item){
+            if(!isset($item->logo)){
+                $item->update(['logo' => "yes".$i]);
+            }
+        }
     }
 }
