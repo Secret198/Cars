@@ -13,13 +13,11 @@ class AddMakerLogo extends Seeder
      */
     public function run(): void
     {
-        $makers = Maker::all();
         
-        $i = 1;
-        foreach($makers as $item){
-            if(!isset($item->logo)){
-                $item->update(['logo' => "yes".$i]);
-            }
+        $logoNames = scandir("./public/logos");
+        foreach($logoNames as $logo){
+            
+            Maker::where("name", str_replace("_", " ", explode(".", $logo)[0]))->update(["logo" => "/logos/".$logo]);
         }
     }
 }

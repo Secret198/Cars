@@ -7,5 +7,6 @@ use App\Http\Controllers\MakerController;
 //     return view('welcome');
 // });
 
-Route::get('makers', [MakerController::class, 'index'])->name('makers');
-Route::post('makers', [MakerController::class, "save"])->name('makers');
+Route::get('makers', [MakerController::class, 'index'])->name('getMakers');
+Route::get('makers/create', [MakerController::class, "create"])->name('createMakers');
+Route::post("makers/create", [MakerController::class, "store"])->name("storeMakers");

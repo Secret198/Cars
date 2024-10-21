@@ -12,7 +12,10 @@ class MakerController
      */
     public function index()
     {
-        return view('makers/list', ['entities' => Maker::all()]);
+        $sort_by = request()->query("sort_by", "name");
+        $sort_dir = request()->query("sort_dir", "asc");
+        $makers = Maker::orderBy($sort_by, $sort_dir)->paginate(5);
+        return view('makers/list', compact("makers"));
     }
 
     /**
@@ -20,7 +23,7 @@ class MakerController
      */
     public function create()
     {
-        //
+        return view('makers/create');
     }
 
     /**
@@ -28,7 +31,15 @@ class MakerController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required|min:3"
+        ]);
+
+        $maker = new Maker();
+        $maker->name = $request->name;
+        $maker->save();
+
+        return redirect()->route("getMakers");
     }
 
     /**
