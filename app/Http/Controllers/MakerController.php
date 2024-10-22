@@ -32,14 +32,15 @@ class MakerController
     public function store(Request $request)
     {
         $request->validate([
-            "name" => "required|min:3"
+            "name" => "required|min:3",
+            "logo" => "nullable"
         ]);
 
         $maker = new Maker();
         $maker->name = $request->name;
         $maker->save();
 
-        return redirect()->route("getMakers");
+        return redirect()->route("getMakers")->with("success", "Gyártó sikeresen hozzáadva");
     }
 
     /**
@@ -55,7 +56,8 @@ class MakerController
      */
     public function edit(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        return view("makers/edit", compact("maker"));
     }
 
     /**
@@ -63,7 +65,15 @@ class MakerController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            "name" => "required|min:3",
+            "logo" => "nullable"
+        ]);
+
+        $maker = Maker::findOrFail($id);
+        $maker->name = $request->name;
+        $maker->save();
+        return redirect()->route("getMakers")->with("success", "Gyártó sikeresen szerkesztve");
     }
 
     /**
@@ -71,6 +81,8 @@ class MakerController
      */
     public function destroy(string $id)
     {
-        //
+        $maker = Maker::find($id);
+        $maker->delete();
+        return redirect()->route("getMakers")->with("success", "Gyártó sikeresen törölve");
     }
 }

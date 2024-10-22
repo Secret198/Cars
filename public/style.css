@@ -9,7 +9,7 @@ body{
 }
 
 .navbar{
-    background-color: rgb(40, 49, 175);
+    background-color: #2F243A;
     height: 40px;
     margin: 0;
     display: flex;
@@ -60,16 +60,105 @@ body{
 
 footer{
     width: 100%;
-    background-color: rgb(0, 0, 37);
+    background-color: #444054;
     color: white;
     padding: var(--generalMargin);
 }
 
 .container{
     padding: var(--generalMargin);
-    background-color: rgb(165, 219, 165);
+    background-color: #BEBBBB;
 }
 
 svg{
     width: var(--generalMargin);
+}
+
+tr{
+    background-color: #FAC9B8;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: 1px solid #444054;
+}
+
+td{
+    padding: 10px;
+}
+
+table{
+    border-collapse: collapse;
+    border: 2px solid #444054;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+td>form>button{
+    font-size: 103%;
+    color: black;
+    background-color: #DB8A74;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+td>form>button:hover{
+    background-color: #ffbd97;
+}
+
+td>a{
+    text-decoration: none;
+    color: black;
+    background-color: #DB8A74;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+td>a:visited{
+    background-color: #DB8A74;
+    color: black;
+}
+
+td>a:hover{
+    background-color: #ffbd97;
+}
+h6{
+    /* margin-bottom: 0; */
+}
+
+.order{
+    text-decoration: none;
+    color: black;
+    background-color: #DB8A74;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+}
+
+.order:hover{
+    background-color: #ffbd97;
+
+}
+
+nav>.flex{
+    display: none;
+}
+
+span>a{
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    border: 1px solid black;
+    margin:5px;
+    border-radius: 5px;
+}
+
+span>span{
+    color: blue;
+    
+}
+
+div>p{
+    display: none;
 }
