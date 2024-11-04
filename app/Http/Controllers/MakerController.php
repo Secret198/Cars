@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarDB;
 use App\Models\Maker;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,9 @@ class MakerController
      */
     public function index()
     {
-        $sort_by = request()->query("sort_by", "name");
+        $sort_by = request()->query("sort_by", "make");
         $sort_dir = request()->query("sort_dir", "asc");
-        $makers = Maker::orderBy($sort_by, $sort_dir)->paginate(5);
+        $makers = CarDB::select("id_trim", "make")->distinct()->orderBy($sort_by, $sort_dir)->paginate(5);
         return view('makers/list', compact("makers"));
     }
 
@@ -36,8 +37,8 @@ class MakerController
             "logo" => "nullable"
         ]);
 
-        $maker = new Maker();
-        $maker->name = $request->name;
+        $maker = new CarDB();
+        $maker->make = $request->name;
         $maker->save();
 
         return redirect()->route("getMakers")->with("success", "Gyártó sikeresen hozzáadva");
@@ -56,7 +57,7 @@ class MakerController
      */
     public function edit(string $id)
     {
-        $maker = Maker::find($id);
+        $maker = CarDB::find($id);
         return view("makers/edit", compact("maker"));
     }
 
@@ -70,7 +71,7 @@ class MakerController
             "logo" => "nullable"
         ]);
 
-        $maker = Maker::findOrFail($id);
+        $maker = CarDB::findOrFail($id);
         $maker->name = $request->name;
         $maker->save();
         return redirect()->route("getMakers")->with("success", "Gyártó sikeresen szerkesztve");
@@ -81,7 +82,7 @@ class MakerController
      */
     public function destroy(string $id)
     {
-        $maker = Maker::find($id);
+        $maker = CarDB::find($id);
         $maker->delete();
         return redirect()->route("getMakers")->with("success", "Gyártó sikeresen törölve");
     }

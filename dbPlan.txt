@@ -1,0 +1,188 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table makers{
+  id integer
+  name string
+  logo string
+}
+
+Table cars{
+  id integer
+  modelName string
+  maker_id integer
+  generation_id integer
+  year_from integer
+  year_to integer
+  series_id integer
+  trim string
+  body_type_id integer
+  load_height integer
+  number_od_seats integer
+  length_mm integer
+  width_mm integer
+  height_mm integer
+  wheelbase_mm integer
+  front_track_mm integer
+  rear_track_mm integer
+  curb_weight_kg integer
+  wheel_size_r14 integer
+  ground_clearence_mm integer
+  trailer_load_with_brakes_kb integer
+  payload_kg integer
+  back_track_width_mm integer
+  front_track_width_mm integer
+  clearence_mm integer
+  full_weight_kg integer
+  front_rear_axle_load_kb integer
+  max_trunk_capacity_l integer
+  cargo_compartment_length_width_height_mm integer
+  cargo_volume_m3 integer
+  minimum_trunk_capacity_l integer
+  maximum_torque_n_m integer
+  injection_type_id integer
+  overhead_camshaft string
+  cylinder_layout_id integer
+  number_of_cylinders integer
+  compression_ratio float
+  engine_type_id integer
+  valves_per_cylinder integer
+  boost_type_id integer
+  cylinder_bore_mm integer
+  stroke_cycle_mm integer
+  engine_placement_id integer
+  cylinder_bore_and_stroke_cycle_mm string
+  turnover_of_maximum_torque_rpm string
+  max_power_kw integer
+  presence_of_intercooler string
+  capacity_cm3 integer
+  engine_hp ingeter
+  engine_hp_rpm integer
+  drive_wheels_id integer
+  bore_stroke_ratio float
+  number_of_gears integer
+  turning_circle_m integer
+  transmission_id integer
+  mixed_fuel_consumption_per_100_km_l float
+  range_km string
+  emission_standards_id integer
+  fuel_tank_capacity_l integer
+  acceleration_0_100_kmh_s float
+  max_speed_km_per_h integer
+  city_fuel_per_100km_l integer
+  co2_emmision_g_per_km integer
+  fuel_grade_id integer
+  back_suspension string
+  front_suspension string
+  rear_brakes_id integer
+  front_brakes_id integer
+  steering_type string
+  car_class string
+  country_of_origin_id integer
+  number_of_doors integer
+  safety_assessment string
+  rating_name_id integer
+  battery_capacity_KW_per_h float
+  electric_range_km integer
+  chargin_time_h float
+  color_id integer
+}
+
+Table rating{
+  id integer
+  name string
+}
+
+Table country{
+  id integer
+  name string
+}
+
+Table brakes{
+  id integer
+  name string
+}
+
+Table fuel{
+  id integer
+  name string
+}
+
+Table emissionStandards{
+  id integer
+  name string
+}
+
+Table transmission{
+  id integer
+  name string
+}
+
+Table drive_wheels{
+  id integer
+  name string
+}
+
+Table enginePlacement{
+  id integer
+  name string
+}
+
+Table boostType{
+  id integer
+  name string
+}
+
+Table engineType{
+  id integer
+  name string
+}
+
+Table cylinderLayout{
+  id integer
+  name string
+}
+
+Table injectionType{
+  id integer
+  name string
+}
+
+Table bodyType{
+  id integer
+  name string
+}
+
+Table series{
+  id integer
+  name string
+}
+
+Table generation{
+  id integer
+  name string
+}
+
+Table color{
+  id integer
+  name string
+}
+
+Ref: cars.generation_id > generation.id
+Ref: cars.series_id > series.id
+Ref: cars.maker_id > makers.id
+Ref: cars.body_type_id > bodyType.id
+Ref: cars.injection_type_id > injectionType.id
+Ref: cars.cylinder_layout_id > cylinderLayout.id
+Ref: cars.engine_type_id > engineType.id
+Ref: cars.boost_type_id > boostType.id
+Ref: cars.engine_placement_id > enginePlacement.id
+Ref: cars.drive_wheels_id > drive_wheels.id
+Ref: cars.transmission_id > transmission.id
+Ref: cars.emission_standards_id > emissionStandards.id
+Ref: cars.fuel_grade_id > fuel.id
+Ref: cars.rear_brakes_id > brakes.id
+Ref: cars.front_brakes_id > brakes.id
+Ref: cars.country_of_origin_id > country.id
+Ref: cars.rating_name_id > rating.id
+Ref: cars.color_id > color.id
