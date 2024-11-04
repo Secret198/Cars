@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarDB;
-use App\Models\Maker;
+use App\Http\Controllers\Controller;
+use App\Models\Transmission;
 use Illuminate\Http\Request;
 
-class MakerController
+class TransmissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class MakerController
         $sort_by = request()->query("sort_by", "name");
         $sort_dir = request()->query("sort_dir", "asc");
         // $makers = CarDB::select("id_trim", "make")->distinct()->orderBy($sort_by, $sort_dir)->paginate(5);
-        $makers = Maker::orderBy($sort_by, $sort_dir)->paginate(5);
-        return view('makers/list', compact("makers"));
+        $transmissions = Transmission::orderBy($sort_by, $sort_dir)->paginate(5);
+        return view('transmissions/list', compact("transmissions"));
     }
 
     /**
@@ -25,7 +25,7 @@ class MakerController
      */
     public function create()
     {
-        return view('makers/create');
+        return view("transmissions/create");
     }
 
     /**
@@ -35,15 +35,14 @@ class MakerController
     {
         $request->validate([
             "name" => "required",
-            "logo" => "nullable"
         ]);
 
-        // $maker = new CarDB();
-        $maker = new Maker();
-        $maker->name = $request->name;
-        $maker->save();
+        $transmission = new Transmission();
+        $transmission->name = $request->name;
+        $transmission->save();
 
-        return redirect()->route("getMakers")->with("success", "Gyártó sikeresen hozzáadva");
+        return redirect()->route("getTransmissions")->with("success", "Gyártó sikeresen hozzáadva");
+    
     }
 
     /**
@@ -59,9 +58,8 @@ class MakerController
      */
     public function edit(string $id)
     {
-        // $maker = CarDB::find($id);
-        $maker = Maker::find($id);
-        return view("makers/edit", compact("maker"));
+        $transmission = Transmission::find($id);
+        return view("transmissions/edit", compact("transmission"));
     }
 
     /**
@@ -71,14 +69,14 @@ class MakerController
     {
         $request->validate([
             "name" => "required",
-            "logo" => "nullable"
         ]);
 
-        // $maker = CarDB::findOrFail($id);
-        $maker = Maker::find($id);
-        $maker->name = $request->name;
-        $maker->save();
-        return redirect()->route("getMakers")->with("success", "Gyártó sikeresen szerkesztve");
+        $transmission = Transmission::find($id);
+        $transmission->name = $request->name;
+        $transmission->save();
+
+        return redirect()->route("getTransmissions")->with("success", "Gyártó sikeresen hozzáadva");
+    
     }
 
     /**
@@ -86,9 +84,6 @@ class MakerController
      */
     public function destroy(string $id)
     {
-        // $maker = CarDB::find($id);
-        $maker = Maker::find($id);
-        $maker->delete();
-        return redirect()->route("getMakers")->with("success", "Gyártó sikeresen törölve");
+        //
     }
 }

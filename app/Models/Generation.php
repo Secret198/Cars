@@ -10,4 +10,8 @@ class Generation extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function cars(){
+        return $this->hasMany(Car::class);
+    }
 }

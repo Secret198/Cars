@@ -11,4 +11,8 @@ class BoostType extends Model
 
     public $timestamps = false;
 
+
+    public function cars(){
+        return $this->hasMany(Car::class);
+    }
 }
