@@ -18,6 +18,10 @@ Route::delete("makers/{id}", [MakerController::class, "destroy"])->name("deleteM
 
 Route::get("cars", [CarController::class, "index"])->name("getCarIndex");
 Route::get("cars/maker", [CarController::class,"listCars"])->name("listCars");
+Route::get('cars/create', [CarController::class, "create"])->name('createCars');
+Route::post("cars/create", [CarController::class, "store"])->name("storeCars");
+Route::get("cars/edit/{id}", [CarController::class, "edit"])->name("editCars");
+Route::patch("cars/update/{id}", [CarController::class, "update"])->name("updateCars");
 
 Route::get('transmissions', [TransmissionController::class, 'index'])->name('getTransmissions');
 Route::get('transmissions/create', [TransmissionController::class, "create"])->name('createTransmissions');

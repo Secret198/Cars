@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Fuel;
+use App\Models\Color;
 use App\Models\Maker;
+use App\Models\BodyType;
+use App\Models\Transmission;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use SebastianBergmann\CodeCoverage\Report\Html\Colors;
 
 class CarController extends Controller
 {
@@ -20,9 +25,10 @@ class CarController extends Controller
 
     public function listCars(Request $request)
     {
-
-        $makerId = $request->query("maker");
-        $cars = Car::where("maker_id", $makerId)->paginate(5);
+        $sort_by = request()->query("sort_by", "name");
+        $sort_dir = request()->query("sort_dir", "asc");
+        $makerId = $request->maker;
+        $cars = Car::where("maker_id", $makerId)->orderBy($sort_by, $sort_dir)->paginate(5);
         return view("cars/list", compact("cars"));
     }
 
@@ -31,7 +37,20 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $makers = Maker::all();
+        $transmissions = Transmission::all();
+        $bodyTypes = BodyType::all();
+        $fuels = Fuel::all();
+        $colors = Color::all();
+
+        $carData = [
+            "makers" => $makers,
+            "transmissions" => $transmissions,
+            "bodyTypes" => $bodyTypes,
+            "fuels" => $fuels,
+            "colors" => $colors,
+        ];        
+        return view("cars/create", compact("carData"));
     }
 
     /**
@@ -39,7 +58,19 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $newCar = new Car([
+            "name"=> $request->name,
+            "maker_id" => $request->makers,
+            "transmission_id" => $request->transmissions,
+            "body_type_id" => $request->bodyTypes,
+            "fuel_id" => $request->fuels,
+            "color_id" => $request->colors,
+        ]);
+
+        $newCar->save();
+
+        return redirect()->route("getCarIndex")->with("success","Autó sikeresen létrehozva");
     }
 
     /**
@@ -55,7 +86,8 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $car = Car::find($id);
+        return view ("cars/edit", compact("car"));
     }
 
     /**

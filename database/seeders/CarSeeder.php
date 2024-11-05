@@ -53,7 +53,7 @@ class CarSeeder extends Seeder
             }
 
 
-            for($j = 0; $j < count($carData); $j++){
+            for($j = 0; $j < 200; $j++){
                 $progress->advance();
 
                 $makerId = $carData[$j]["maker"] ? Maker::select("id")->where("name", $carData[$j]["maker"])->first()->id : null;

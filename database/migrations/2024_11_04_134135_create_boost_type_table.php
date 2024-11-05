@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('boost_type', function (Blueprint $table) {
+        Schema::create('boost_types', function (Blueprint $table) {
             $table->id();
             $table->string("name");
         });

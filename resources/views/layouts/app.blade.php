@@ -12,7 +12,7 @@
     <nav class="navbar">
         <ul>
             <li><a href="{{route("getMakers")}}">Gyártók</a></li>
-            <li><a href="{{route("getMakers")}}">Gyártók</a></li>
+            <li><a href="{{route("getCarIndex")}}">Autók</a></li>
             <li><a href="{{route("getMakers")}}">Gyártók</a></li>
         </ul>
     </nav>

@@ -28,7 +28,7 @@ class getMakers extends Command
      */
     public function handle()
     {
-        config(["database.connections.mysql.database" => "cars2"]);
+        config(["database.connections.mysql.database" => "cars"]);
 
         if(file_exists("car-db.csv")){
             $handler = fopen("car-db.csv", "r");

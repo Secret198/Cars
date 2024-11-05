@@ -11,6 +11,15 @@ class Car extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        "name",
+        "maker_id",
+        "transmission_id",
+        "body_type_id",
+        "color_id",
+        "fuel_id",
+    ];
+
     public function maker(){
         return $this->belongsTo(Maker::class);
     }

@@ -3,6 +3,7 @@
 @section('content')
 
     <div class="container">
+        <h1>Válasszon gyártót</h1>
         <form action="{{route("listCars")}}" method="GET">
             @csrf
             <select name="maker" id="maker">

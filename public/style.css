@@ -81,7 +81,7 @@ tr{
     border: 1px solid #444054;
 }
 
-td{
+td, th{
     padding: 10px;
 }
 
@@ -90,6 +90,7 @@ table{
     border: 2px solid #444054;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #fac9b8;
 }
 
 td>form>button{

@@ -8,7 +8,13 @@
         <a class="order" href="{{route("getMakers", ["sort_by" => "name", "sort_dir" => "asc"])}}" title="ABC">Növekvő</a>
         <a class="order" href="{{route("getMakers", ["sort_by" => "name", "sort_dir" => "desc"])}}" title="ZYX">Csökkenő</a>
         <table class="table">
-            
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Gyártó név</th>
+                    <th>Logó</th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach($makers as $entity)
                     <tr>

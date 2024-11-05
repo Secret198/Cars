@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cylinder_layout', function (Blueprint $table) {
+        Schema::create('cylinder_layouts', function (Blueprint $table) {
             $table->id();
             $table->string("name");
         });
