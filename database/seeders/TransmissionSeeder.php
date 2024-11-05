@@ -21,9 +21,27 @@ class TransmissionSeeder extends Seeder
             'szekvenciális',
         ];
 
-        foreach ($transmissions as $transmisssion){
-            $newTransmission = new Transmission(["name" => $transmisssion]);
-            $newTransmission->save();
+        // foreach ($transmissions as $transmisssion){
+        //     $newTransmission = new Transmission(["name" => $transmisssion]);
+        //     $newTransmission->save();
+        // }
+
+        if(file_exists("car-db.csv")){
+            $handler = fopen("car-db.csv", "r");
+
+            $i = 0;
+            $transmissions = array();
+            while(($data = fgetcsv($handler, null, ",")) !== FALSE){
+                if($i > 0 && !in_array($data[54], $transmissions) && $data[54] != ""){
+                    array_push($transmissions, $data[54]);
+                }
+                $i++;
+            }
+
+            foreach($transmissions as $transmisssion){
+                $newTrans = new Transmission(["name" => $transmisssion]);
+                $newTrans->save();
+            }
         }
     }
 }

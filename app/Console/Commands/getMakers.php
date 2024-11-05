@@ -28,7 +28,7 @@ class getMakers extends Command
      */
     public function handle()
     {
-        config(["database.connections.mysql.database" => "cars"]);
+        config(["database.connections.mysql.database" => "cars2"]);
 
         if(file_exists("car-db.csv")){
             $handler = fopen("car-db.csv", "r");
@@ -43,7 +43,7 @@ class getMakers extends Command
                 }
                 $i++;
             }
-            
+
             $progress = progress(label: "Uploading maker data" , steps: count($names));
             $progress->start();
 

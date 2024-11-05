@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('body_type', function (Blueprint $table) {
+        Schema::create('body_types', function (Blueprint $table) {
             $table->id();
             $table->string("name");
         });

@@ -13,7 +13,12 @@
                 @foreach($cars as $entity)
                     <tr>
                         <td id="{{$entity->id}}">{{$entity->id}}</td>
+                        <!-- Verify if not null -->
                         <td>{{$entity->name}}</td>
+                        <td>{{$entity->maker}}</td>
+                        <td>{{$entity->transmission}}</td>
+                        <td>{{$entity->bodyType}}</td>
+                        <td>{{$entity->fuel}}</td>
                        <td><a href="{{route("editMakers", $entity->id)}}">Szerkesztés</a></td>
                        <td>
                             <form action="{{route("deleteMakers", $entity->id)}}" method="post">
