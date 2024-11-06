@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Gyártó hozzáadása</h1>
+    <h1>Karosszéria hozzáadása</h1>
     <div class="container">
-        <form action="{{route("storeMakers")}}" method="post">
+        <form action="{{route("storeBodyTypes")}}" method="post">
             @csrf
             <label for="name">Név: </label>
             <input type="text" id="name" name="name">

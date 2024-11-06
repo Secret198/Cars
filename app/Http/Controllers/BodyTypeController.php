@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transmission;
+use App\Models\BodyType;
 use Illuminate\Http\Request;
 
-class TransmissionController extends Controller
+class BodyTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class TransmissionController extends Controller
         $sort_by = request()->query("sort_by", "name");
         $sort_dir = request()->query("sort_dir", "asc");
         // $makers = CarDB::select("id_trim", "make")->distinct()->orderBy($sort_by, $sort_dir)->paginate(5);
-        $transmissions = Transmission::orderBy($sort_by, $sort_dir)->paginate(5);
-        return view('transmissions/list', compact("transmissions"));
+        $bodyTypes = BodyType::orderBy($sort_by, $sort_dir)->paginate(5);
+        return view('bodytypes/list', compact("bodyTypes"));
     }
 
     /**
@@ -25,7 +25,7 @@ class TransmissionController extends Controller
      */
     public function create()
     {
-        return view("transmissions/create");
+        return view("bodytypes/create");
     }
 
     /**
@@ -37,11 +37,11 @@ class TransmissionController extends Controller
             "name" => "required",
         ]);
 
-        $transmission = new Transmission();
-        $transmission->name = $request->name;
-        $transmission->save();
+        $bodyType = new BodyType();
+        $bodyType->name = $request->name;
+        $bodyType->save();
 
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen frissítve");
+        return redirect()->route("getBodyTypes")->with("success", "Karosszéria sikeresen hozzáadva");
     
     }
 
@@ -58,8 +58,8 @@ class TransmissionController extends Controller
      */
     public function edit(string $id)
     {
-        $transmission = Transmission::find($id);
-        return view("transmissions/edit", compact("transmission"));
+        $bodyType = BodyType::find($id);
+        return view("bodytypes/edit", compact("bodyType"));
     }
 
     /**
@@ -71,11 +71,11 @@ class TransmissionController extends Controller
             "name" => "required",
         ]);
 
-        $transmission = Transmission::find($id);
-        $transmission->name = $request->name;
-        $transmission->save();
+        $bodyType = BodyType::find($id);
+        $bodyType->name = $request->name;
+        $bodyType->save();
 
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen hozzáadva");
+        return redirect()->route("getBodyTypes")->with("success", "Karosszéria sikeresen frissítve");
     
     }
 
@@ -84,9 +84,10 @@ class TransmissionController extends Controller
      */
     public function destroy(string $id)
     {
-        $transmission = Transmission::find($id);
-        $transmission->delete();
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen hozzáadva");
+        $bodyType = BodyType::find($id);
+        $bodyType->delete();
+
+        return redirect()->route("getBodyTypes")->with("success", "Karosszéria sikeresen törölve");
 
     }
 }

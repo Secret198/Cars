@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Transmission;
+use App\Models\Color;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class TransmissionController extends Controller
+class ColorController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
@@ -16,8 +16,8 @@ class TransmissionController extends Controller
         $sort_by = request()->query("sort_by", "name");
         $sort_dir = request()->query("sort_dir", "asc");
         // $makers = CarDB::select("id_trim", "make")->distinct()->orderBy($sort_by, $sort_dir)->paginate(5);
-        $transmissions = Transmission::orderBy($sort_by, $sort_dir)->paginate(5);
-        return view('transmissions/list', compact("transmissions"));
+        $colors = Color::orderBy($sort_by, $sort_dir)->paginate(5);
+        return view('colors/list', compact("colors"));
     }
 
     /**
@@ -25,7 +25,7 @@ class TransmissionController extends Controller
      */
     public function create()
     {
-        return view("transmissions/create");
+        return view("colors/create");
     }
 
     /**
@@ -35,13 +35,15 @@ class TransmissionController extends Controller
     {
         $request->validate([
             "name" => "required",
+            "hexCode" => "required",
         ]);
 
-        $transmission = new Transmission();
-        $transmission->name = $request->name;
-        $transmission->save();
+        $color = new Color();
+        $color->name = $request->name;
+        $color->hexa_code = $request->hexCode;
+        $color->save();
 
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen frissítve");
+        return redirect()->route("getColors")->with("success", "Üzemanyag sikeresen hozzáadva");
     
     }
 
@@ -58,8 +60,8 @@ class TransmissionController extends Controller
      */
     public function edit(string $id)
     {
-        $transmission = Transmission::find($id);
-        return view("transmissions/edit", compact("transmission"));
+        $color = Color::find($id);
+        return view("colors/edit", compact("color"));
     }
 
     /**
@@ -69,13 +71,15 @@ class TransmissionController extends Controller
     {
         $request->validate([
             "name" => "required",
+            "hexCode" => "required",
         ]);
 
-        $transmission = Transmission::find($id);
-        $transmission->name = $request->name;
-        $transmission->save();
+        $color = Color::find($id);
+        $color->name = $request->name;
+        $color->hexa_code = $request->hexCode;
+        $color->save();
 
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen hozzáadva");
+        return redirect()->route("getColors")->with("success", "Üzemanyag sikeresen frissítve");
     
     }
 
@@ -84,9 +88,10 @@ class TransmissionController extends Controller
      */
     public function destroy(string $id)
     {
-        $transmission = Transmission::find($id);
-        $transmission->delete();
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen hozzáadva");
+        $color = Color::find($id);
+        $color->delete();
+
+        return redirect()->route("getColors")->with("success", "Üzemanyag sikeresen törölve");
 
     }
 }

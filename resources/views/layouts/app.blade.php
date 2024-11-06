@@ -11,9 +11,13 @@
 <body>
     <nav class="navbar">
         <ul>
+            <li><a href="{{route("home")}}">Kezdőlap</a></li>
             <li><a href="{{route("getMakers")}}">Gyártók</a></li>
             <li><a href="{{route("getCarIndex")}}">Autók</a></li>
-            <li><a href="{{route("getMakers")}}">Gyártók</a></li>
+            <li><a href="{{route("getTransmissions")}}">Váltók</a></li>
+            <li><a href="{{route("getBodyTypes")}}">Karosszériák</a></li>
+            <li><a href="{{route("getFuels")}}">Üzemanyagok</a></li>
+            <li><a href="{{route("getColors")}}">Színek</a></li>
         </ul>
     </nav>
 

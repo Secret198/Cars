@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <h1>Gyártók</h1>
     <div class="container">
         <a class="order" href="{{route("createMakers")}}">Új gyártó</a>
         <h6>Rendezés</h6>

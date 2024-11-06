@@ -86,8 +86,23 @@ class CarController extends Controller
      */
     public function edit(string $id)
     {
+        $makers = Maker::all();
+        $transmissions = Transmission::all();
+        $bodyTypes = BodyType::all();
+        $fuels = Fuel::all();
+        $colors = Color::all();
+
         $car = Car::find($id);
-        return view ("cars/edit", compact("car"));
+
+        $carData = [
+            "makers" => $makers,
+            "transmissions" => $transmissions,
+            "bodyTypes" => $bodyTypes,
+            "fuels" => $fuels,
+            "colors" => $colors,
+            "car" => $car,
+        ];
+        return view ("cars/edit", compact("carData"));
     }
 
     /**
@@ -95,7 +110,16 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $car = Car::find($id);
+        $car->name = $request->name;
+        $car->maker_id = $request->makers;
+        $car->body_type_id = $request->bodyTypes;
+        $car->transmission_id = $request->transmissions;
+        $car->fuel_id = $request->fuels;
+        $car->color_id = $request->colors;
+        $car->save();
+
+        return redirect()->route("getCarIndex")->with("success","Autó sikeresen frissítve");
     }
 
     /**
@@ -103,6 +127,13 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Car::find($id)->delete();
+
+        return redirect()->route("getCarIndex")->with("success","Autó sikeresen törölve");
+
+    }
+
+    public function home(){
+        return view ("home");
     }
 }

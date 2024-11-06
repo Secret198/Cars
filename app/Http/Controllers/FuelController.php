@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transmission;
+use App\Models\Fuel;
 use Illuminate\Http\Request;
 
-class TransmissionController extends Controller
+class FuelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,8 @@ class TransmissionController extends Controller
         $sort_by = request()->query("sort_by", "name");
         $sort_dir = request()->query("sort_dir", "asc");
         // $makers = CarDB::select("id_trim", "make")->distinct()->orderBy($sort_by, $sort_dir)->paginate(5);
-        $transmissions = Transmission::orderBy($sort_by, $sort_dir)->paginate(5);
-        return view('transmissions/list', compact("transmissions"));
+        $fuels = Fuel::orderBy($sort_by, $sort_dir)->paginate(5);
+        return view('fuels/list', compact("fuels"));
     }
 
     /**
@@ -25,7 +25,7 @@ class TransmissionController extends Controller
      */
     public function create()
     {
-        return view("transmissions/create");
+        return view("fuels/create");
     }
 
     /**
@@ -37,11 +37,11 @@ class TransmissionController extends Controller
             "name" => "required",
         ]);
 
-        $transmission = new Transmission();
-        $transmission->name = $request->name;
-        $transmission->save();
+        $fuel = new Fuel();
+        $fuel->name = $request->name;
+        $fuel->save();
 
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen frissítve");
+        return redirect()->route("getFuels")->with("success", "Üzemanyag sikeresen hozzáadva");
     
     }
 
@@ -58,8 +58,8 @@ class TransmissionController extends Controller
      */
     public function edit(string $id)
     {
-        $transmission = Transmission::find($id);
-        return view("transmissions/edit", compact("transmission"));
+        $fuel = Fuel::find($id);
+        return view("fuels/edit", compact("fuel"));
     }
 
     /**
@@ -71,11 +71,11 @@ class TransmissionController extends Controller
             "name" => "required",
         ]);
 
-        $transmission = Transmission::find($id);
-        $transmission->name = $request->name;
-        $transmission->save();
+        $fuel = Fuel::find($id);
+        $fuel->name = $request->name;
+        $fuel->save();
 
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen hozzáadva");
+        return redirect()->route("getFuels")->with("success", "Üzemanyag sikeresen frissítve");
     
     }
 
@@ -84,9 +84,10 @@ class TransmissionController extends Controller
      */
     public function destroy(string $id)
     {
-        $transmission = Transmission::find($id);
-        $transmission->delete();
-        return redirect()->route("getTransmissions")->with("success", "Váltó sikeresen hozzáadva");
+        $fuel = Fuel::find($id);
+        $fuel->delete();
+
+        return redirect()->route("getFuels")->with("success", "Üzemanyag sikeresen törölve");
 
     }
 }

@@ -1,12 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <h1>Autó modellek</h1>
     <div class="container">
         <a class="order" href="{{route("createCars")}}">Új autó</a>
         <h6>Rendezés</h6>
-        <a class="order" href="{{route("listCars", ["sort_by" => "name", "sort_dir" => "asc", "maker" => $cars[0]->maker->id])}}" title="ABC">Növekvő</a>
-        <a class="order" href="{{route("listCars", ["sort_by" => "name", "sort_dir" => "desc", "maker" => $cars[0]->maker->id])}}" title="ZYX">Csökkenő</a>
+        @if($cars[0])
+            <a class="order" href="{{route("listCars", ["sort_by" => "name", "sort_dir" => "asc", "maker" => $cars[0]->maker->id])}}" title="ABC">Növekvő</a>
+            <a class="order" href="{{route("listCars", ["sort_by" => "name", "sort_dir" => "desc", "maker" => $cars[0]->maker->id])}}" title="ZYX">Csökkenő</a>
+        @else
+             <a class="order" href="{{route("listCars", ["sort_by" => "name", "sort_dir" => "asc" ])}}" title="ABC">Növekvő</a>
+            <a class="order" href="{{route("listCars", ["sort_by" => "name", "sort_dir" => "desc"])}}" title="ZYX">Csökkenő</a>
+        @endif
         <table class="table">
             <thead>
                 <tr>
@@ -60,9 +65,9 @@
                             <td style="background-color:{{$entity->color->hexa_code}}">{{$entity->color->name}}</td>
                         @endif
 
-                       <td><a href="{{route("editMakers", $entity->id)}}">Szerkesztés</a></td>
+                       <td><a href="{{route("editCars", $entity->id)}}">Szerkesztés</a></td>
                        <td>
-                            <form action="{{route("deleteMakers", $entity->id)}}" method="post">
+                            <form action="{{route("deleteCars", $entity->id)}}" method="post">
                                 @csrf
                                 @method("DELETE")
                                 <button type="submit">Törlés</button>
