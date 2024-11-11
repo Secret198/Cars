@@ -25,6 +25,10 @@ class CarController extends Controller
 
     public function listCars(Request $request)
     {
+        $request->validate([
+            "maker" => "required|numeric"
+        ]);
+
         $sort_by = request()->query("sort_by", "name");
         $sort_dir = request()->query("sort_dir", "asc");
         $makerId = $request->maker;
@@ -58,6 +62,14 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => "required",
+            "makers" => "required|numeric",
+            "transmissions" => "required|numeric",
+            "bodyTypes" => "required|numeric",
+            "fuels" => "required|numeric",
+            "colors" => "required|numeric"
+        ]);
 
         $newCar = new Car([
             "name"=> $request->name,
@@ -70,7 +82,7 @@ class CarController extends Controller
 
         $newCar->save();
 
-        return redirect()->route("getCarIndex")->with("success","Autó sikeresen létrehozva");
+        return redirect()->route("listCars", ["maker" => $newCar->maker_id, "#".$newCar->id])->with("success","Autó sikeresen létrehozva");
     }
 
     /**
@@ -110,6 +122,52 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate([
+            "name" => "nullable",
+            "makers" => "nullable|numeric",
+            "transmissions" => "nullable|numeric",
+            "bodyTypes" => "nullable|numeric",
+            "fuels" => "nullable|numeric",
+            "colors" => "nullable|numeric"
+        ]);
+
+        if($request->makers == 0){
+            $makers = null;
+        }
+        else{
+            $makers = $request->makers;
+        }
+
+        if($request->transmissions == 0){
+            $transmissions = null;
+        }
+        else{
+            $transmissions = $request->transmissions;
+        }
+
+        if($request->bodyTypes == 0){
+            $bodyTypes = null;
+        }
+        else{
+            $bodyTypes = $request->bodyTypes;
+        }
+
+        if($request->fuels == 0){
+            $fuels = null;
+        }
+        else{
+            $fuels = $request->fuels;
+        }
+
+        if($request->colors == 0){
+            $colors = null;
+        }
+        else{
+            $colors = $request->makers;
+        }
+
+
         $car = Car::find($id);
         $car->name = $request->name;
         $car->maker_id = $request->makers;
@@ -117,9 +175,14 @@ class CarController extends Controller
         $car->transmission_id = $request->transmissions;
         $car->fuel_id = $request->fuels;
         $car->color_id = $request->colors;
+        // $car->maker_id = $makers;
+        // $car->body_type_id = $bodyTypes;
+        // $car->transmission_id = $transmissions;
+        // $car->fuel_id = $fuels;
+        // $car->color_id = $colors;
         $car->save();
 
-        return redirect()->route("getCarIndex")->with("success","Autó sikeresen frissítve");
+        return redirect()->route("listCars", ["maker" => $car->maker_id, "#".$car->id])->with("success","Autó sikeresen frissítve");
     }
 
     /**

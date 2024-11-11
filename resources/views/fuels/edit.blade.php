@@ -2,6 +2,11 @@
 
 @section('content')
     <h1>Üzemanyag szerkesztése</h1>
+    <div class="error">
+        @if($errors->any())
+        {{ implode('', $errors->all(':message')) }}
+        @endif
+    </div> 
     <form action="{{route("updateFuels", $fuel->id)}}" method="post">
         @csrf
         @method('PATCH')

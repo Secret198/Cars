@@ -163,3 +163,7 @@ span>span{
 div>p{
     display: none;
 }
+
+.error{
+    color: red;
+}

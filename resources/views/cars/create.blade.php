@@ -3,7 +3,13 @@
 @section('content')
 
     <div class="container">
-        <form action="{{route("storeCars")}}" method="post">
+
+    <div class="error">
+        @if($errors->any())
+        {{ implode('', $errors->all(':message')) }}
+        @endif
+    </div>  
+    <form action="{{route("storeCars")}}" method="post">
             @csrf
             <label for="name">Modell név </label>
             <input type="text" id="name" name="name">
@@ -46,4 +52,5 @@
             <button type="submit">Küldés</button>
         </form>
     </div>
+    
 @endsection

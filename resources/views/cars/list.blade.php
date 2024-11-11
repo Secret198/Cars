@@ -3,6 +3,11 @@
 @section('content')
     <h1>Autó modellek</h1>
     <div class="container">
+        <div class="error">
+            @if($errors->any())
+            {{ implode('', $errors->all(':message')) }}
+            @endif
+        </div>  
         <a class="order" href="{{route("createCars")}}">Új autó</a>
         <h6>Rendezés</h6>
         @if($cars[0])
@@ -26,7 +31,7 @@
             </thead>
             <tbody>
                 @foreach($cars as $entity)
-                    <tr>
+                    <tr id="{{$entity->id}}">
                         <td id="{{$entity->id}}">{{$entity->id}}</td>
 
                         @if(!$entity->name)
@@ -77,6 +82,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{$cars->links()}}
+        {{$cars->appends(["maker" => $cars[0]->maker_id])->links()}}
     </div>
 @endsection
