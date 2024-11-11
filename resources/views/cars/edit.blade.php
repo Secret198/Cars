@@ -6,6 +6,11 @@
         {{ implode('', $errors->all(':message')) }}
         @endif
     </div>  
+    @if(session("success"))
+        <div class="success">
+            {{session("success")}}
+        </div>
+    @endif
     <h1>Autó szerkesztése</h1>
     <form action="{{route("updateCars", $carData["car"]->id)}}" method="post">
         @csrf
@@ -14,7 +19,6 @@
         <input type="text" name="name" id="name" value="{{$carData["car"]->name}}">
 
 
-        {{-- Do the edit --}}
         <label for="makers">Gyártó</label>
         <select name="makers" id="makers">
             @foreach($carData["makers"] as $data)

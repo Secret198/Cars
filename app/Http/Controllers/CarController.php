@@ -132,41 +132,7 @@ class CarController extends Controller
             "colors" => "nullable|numeric"
         ]);
 
-        if($request->makers == 0){
-            $makers = null;
-        }
-        else{
-            $makers = $request->makers;
-        }
-
-        if($request->transmissions == 0){
-            $transmissions = null;
-        }
-        else{
-            $transmissions = $request->transmissions;
-        }
-
-        if($request->bodyTypes == 0){
-            $bodyTypes = null;
-        }
-        else{
-            $bodyTypes = $request->bodyTypes;
-        }
-
-        if($request->fuels == 0){
-            $fuels = null;
-        }
-        else{
-            $fuels = $request->fuels;
-        }
-
-        if($request->colors == 0){
-            $colors = null;
-        }
-        else{
-            $colors = $request->makers;
-        }
-
+       
 
         $car = Car::find($id);
         $car->name = $request->name;
@@ -175,11 +141,6 @@ class CarController extends Controller
         $car->transmission_id = $request->transmissions;
         $car->fuel_id = $request->fuels;
         $car->color_id = $request->colors;
-        // $car->maker_id = $makers;
-        // $car->body_type_id = $bodyTypes;
-        // $car->transmission_id = $transmissions;
-        // $car->fuel_id = $fuels;
-        // $car->color_id = $colors;
         $car->save();
 
         return redirect()->route("listCars", ["maker" => $car->maker_id, "#".$car->id])->with("success","Autó sikeresen frissítve");
