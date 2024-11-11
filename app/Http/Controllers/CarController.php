@@ -190,9 +190,11 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
-        Car::find($id)->delete();
+        $car = Car::find($id);
+        $maker_id = $car->maker_id;
+        $car->delete();
 
-        return redirect()->route("getCarIndex")->with("success","Autó sikeresen törölve");
+        return redirect()->route("listCars", ["maker" => $maker_id])->with("success","Autó sikeresen törölve");
 
     }
 
