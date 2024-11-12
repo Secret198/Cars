@@ -8,12 +8,14 @@ use App\Models\Color;
 use App\Models\Maker;
 use App\Models\BodyType;
 use App\Models\Transmission;
+use App\ValidationRules;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use SebastianBergmann\CodeCoverage\Report\Html\Colors;
 
 class CarController extends Controller
 {
+    use ValidationRules;
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +29,7 @@ class CarController extends Controller
     {
         $request->validate([
             "maker" => "required|numeric"
-        ]);
+        ], $this->GetErrorMessages());
 
         $sort_by = request()->query("sort_by", "name");
         $sort_dir = request()->query("sort_dir", "asc");
@@ -62,6 +64,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate($this->CarCreateRules());
         $request->validate([
             "name" => "required",
             "makers" => "required|numeric",
@@ -69,7 +72,7 @@ class CarController extends Controller
             "bodyTypes" => "required|numeric",
             "fuels" => "required|numeric",
             "colors" => "required|numeric"
-        ]);
+        ], $this->GetErrorMessages());
 
         $newCar = new Car([
             "name"=> $request->name,
@@ -124,13 +127,13 @@ class CarController extends Controller
     {
 
         $request->validate([
-            "name" => "nullable",
+            "name" => "required",
             "makers" => "nullable|numeric",
             "transmissions" => "nullable|numeric",
             "bodyTypes" => "nullable|numeric",
             "fuels" => "nullable|numeric",
             "colors" => "nullable|numeric"
-        ]);
+        ], $this->GetErrorMessages());
 
        
 

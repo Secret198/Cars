@@ -2,11 +2,7 @@
 
 @section('content')
     <h1>Szín szerkesztése</h1>
-    <div class="error">
-        @if($errors->any())
-        {{ implode('', $errors->all(':message')) }}
-        @endif
-    </div> 
+    
     <form action="{{route("updateColors", $color->id)}}" method="post">
         @csrf
         @method('PATCH')

@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Transmission;
+use App\ValidationRules;
 use Illuminate\Http\Request;
 
 class TransmissionController extends Controller
 {
+    use ValidationRules;
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +37,7 @@ class TransmissionController extends Controller
     {
         $request->validate([
             "name" => "required",
-        ]);
+        ], $this->GetErrorMessages());
 
         $transmission = new Transmission();
         $transmission->name = $request->name;
@@ -68,8 +70,8 @@ class TransmissionController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            "name" => "required",
-        ]);
+            "name" => "required|min:3",
+        ], $this->GetErrorMessages());
 
         $transmission = Transmission::find($id);
         $transmission->name = $request->name;

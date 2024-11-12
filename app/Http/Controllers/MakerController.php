@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\CarDB;
 use App\Models\Maker;
+use App\ValidationRules;
 use Illuminate\Http\Request;
 
 class MakerController
 {
+    use ValidationRules;
     /**
      * Display a listing of the resource.
      */
@@ -36,7 +38,7 @@ class MakerController
         $request->validate([
             "name" => "required",
             "logo" => "nullable"
-        ]);
+        ], $this->GetErrorMessages());
 
         // $maker = new CarDB();
         $maker = new Maker();
@@ -72,7 +74,7 @@ class MakerController
         $request->validate([
             "name" => "required",
             "logo" => "nullable"
-        ]);
+        ], $this->GetErrorMessages());
 
         // $maker = CarDB::findOrFail($id);
         $maker = Maker::find($id);

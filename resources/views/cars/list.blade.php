@@ -3,11 +3,7 @@
 @section('content')
     <h1>Autó modellek</h1>
     <div class="container">
-        <div class="error">
-            @if($errors->any())
-            {{ implode('', $errors->all(':message')) }}
-            @endif
-        </div>  
+      
         <a class="order" href="{{route("createCars")}}">Új autó</a>
         <h6>Rendezés</h6>
         @if($cars[0])

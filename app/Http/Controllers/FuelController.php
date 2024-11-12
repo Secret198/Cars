@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fuel;
+use App\ValidationRules;
 use Illuminate\Http\Request;
 
 class FuelController extends Controller
 {
+    use ValidationRules;
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +37,7 @@ class FuelController extends Controller
     {
         $request->validate([
             "name" => "required",
-        ]);
+        ], $this->GetErrorMessages());
 
         $fuel = new Fuel();
         $fuel->name = $request->name;
@@ -69,7 +71,7 @@ class FuelController extends Controller
     {
         $request->validate([
             "name" => "required",
-        ]);
+        ], $this->GetErrorMessages());
 
         $fuel = Fuel::find($id);
         $fuel->name = $request->name;

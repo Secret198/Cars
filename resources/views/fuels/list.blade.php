@@ -3,12 +3,8 @@
 @section('content')
     <h1>Üzemanyagok</h1>
     <div class="container">
-        <div class="error">
-            @if($errors->any())
-            {{ implode('', $errors->all(':message')) }}
-            @endif
-        </div> 
-        <a class="order" href="{{route("createFuels")}}">Új váltó</a>
+        
+        <a class="order" href="{{route("createFuels")}}">Új üzemanyag</a>
         <h6>Rendezés</h6>
         <a class="order" href="{{route("getFuels", ["sort_by" => "name", "sort_dir" => "asc"])}}" title="ABC">Növekvő</a>
         <a class="order" href="{{route("getFuels", ["sort_by" => "name", "sort_dir" => "desc"])}}" title="ZYX">Csökkenő</a>

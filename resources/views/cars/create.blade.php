@@ -3,12 +3,7 @@
 @section('content')
 
     <div class="container">
-
-    <div class="error">
-        @if($errors->any())
-        {{ implode('', $errors->all(':message')) }}
-        @endif
-    </div>  
+ 
     <form action="{{route("storeCars")}}" method="post">
             @csrf
             <label for="name">Modell név </label>

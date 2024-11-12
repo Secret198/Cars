@@ -1,11 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="error">
-        @if($errors->any())
-        {{ implode('', $errors->all(':message')) }}
-        @endif
-    </div>  
+   
     @if(session("success"))
         <div class="success">
             {{session("success")}}

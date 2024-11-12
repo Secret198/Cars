@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\BodyType;
+use App\ValidationRules;
 use Illuminate\Http\Request;
 
 class BodyTypeController extends Controller
 {
+    use ValidationRules;
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +37,7 @@ class BodyTypeController extends Controller
     {
         $request->validate([
             "name" => "required",
-        ]);
+        ], $this->GetErrorMessages());
 
         $bodyType = new BodyType();
         $bodyType->name = $request->name;
@@ -69,7 +71,7 @@ class BodyTypeController extends Controller
     {
         $request->validate([
             "name" => "required",
-        ]);
+        ], $this->GetErrorMessages());
 
         $bodyType = BodyType::find($id);
         $bodyType->name = $request->name;

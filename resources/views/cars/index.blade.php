@@ -4,11 +4,7 @@
      
     <div class="container">
         <h1>Válasszon gyártót</h1>
-        <div class="error">
-            @if($errors->any())
-            {{ implode('', $errors->all(':message')) }}
-            @endif
-        </div> 
+       
         <form action="{{route("listCars")}}" method="GET">
             @csrf
             <select name="maker" id="maker">

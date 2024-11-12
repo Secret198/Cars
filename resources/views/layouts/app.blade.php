@@ -24,6 +24,11 @@
     <div class="container">
 
         <main class="py-4">
+        @if($errors->any())
+        <div class="error">
+            {{ implode('', $errors->all(':message')) }}
+        </div> 
+        @endif
             @yield('content')
         </main>
 
